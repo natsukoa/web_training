@@ -1,7 +1,6 @@
 
 
 def check_params(params):
-    print(params)
     result = []
     for param in params:
         if not param.isdecimal() and \
