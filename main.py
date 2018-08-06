@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from calc import calc
+from check_params import check_params
 import logging
 
 app = Flask(__name__)
@@ -7,18 +7,12 @@ logging.basicConfig(
         format='%(asctime)s @%(name)s [%(levelname)s]:%(message)s',
         level = logging.DEBUG)
 
-@app.route('/calc?<params>', methods=['GET'])
-def executor(params):
-    logging.info('start model update process')
-    print(calc(params))
-    logging.info('complete model update process')
-    return jsonify({'result': 'complete update model'})
-
+@app.route('/calc/<params>', methods=['GET', 'POST'])
+def executor(params=None):
+    result = check_params(params)
+    return str(eval(result))
 
 
 if __name__ == '__main__':
-    app.run(host='172.31.15.95', port=8080)
-    try:
-        logging.info('API service started')
-    finally:
-        logging.info('API service stopped')
+    app.run(host='0.0.0.0', port=8080)
+    
