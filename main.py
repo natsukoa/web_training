@@ -6,8 +6,8 @@ logging.basicConfig(
         format='%(asctime)s @%(name)s [%(levelname)s]:%(message)s',
         level = logging.DEBUG)
 
-@app.route('/<params>', defaults={'param2': '+0'}, methods=['GET'])
-@app.route('/<params>/<param2>', methods=['GET'])
+@app.route('calc/<params>', defaults={'param2': '+0'}, methods=['GET'])
+@app.route('calc/<params>/<param2>', methods=['GET'])
 def executor(params, param2):
     params = request.path[1:]
     result = []
@@ -21,5 +21,5 @@ def executor(params, param2):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run()
     
